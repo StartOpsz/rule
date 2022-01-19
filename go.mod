@@ -1,3 +1,3 @@
-module github.com/startopsz/rule/v1
+module github.com/startopsz/rule
 
 go 1.16

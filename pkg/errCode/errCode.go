@@ -5,6 +5,8 @@ const (
 	NotFound = 404
 	ParameterNotFound = 1404
 	DatabaseOpError = 1201
-	
 )
 
+func TT() {
+
+}
