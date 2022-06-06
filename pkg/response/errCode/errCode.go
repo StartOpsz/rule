@@ -12,7 +12,18 @@ const (
 
 	ParameterNotFoundCode = 14041
 	ParameterNotFoundMsg  = "参数缺失"
-
+	
+	
+	// 注册中心连接失败
+	RegisterConnectErrorCode = 15051
+	RegisterConnectErrorMsg = "注册中心连接失败"
+	// GRpc 调用 Endpoint 为空
+	GRpcEndpointNotFoundCode = 15052
+	GRpcEndpointNotFoundMsg = "Endpoint Is Null"
+	// GRpc 调用返回 error
+	GRpcCallErrorCode = 15053
+	GRpcCallErrorMsg = "Endpoint return error"
+	
 	DatabaseOpErrorCode = 17001
 	DatabaseOpErrorMsg  = "内部系统异常，请核对code。"
 
@@ -24,4 +35,7 @@ const (
 
 	CircuitBreakerCode = 18002
 	CircuitBreakerMsg  = "熔断限制"
+	
+	
+	
 )

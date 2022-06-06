@@ -8,6 +8,7 @@ type ExecTime struct {
 	CostTime  int64
 }
 
+
 func ExecTimeResult(startTime time.Time) ExecTime {
 	endTime := time.Now()
 	return ExecTime{
