@@ -13,6 +13,10 @@ const (
 	ParameterNotFoundCode = 14041
 	ParameterNotFoundMsg  = "参数缺失"
 	
+	ParameterFormatErrCode = 14042
+	ParameterFormatErrMsg  = "参数格式异常"
+	
+	
 	
 	// 注册中心连接失败
 	RegisterConnectErrorCode = 15051

@@ -70,6 +70,8 @@ func (r Req) Do() (Resp, error) {
 		return rp, err
 	}
 	
+	req.Header.Set("user-agent", "startops")
+	
 	for k, v := range r.Headers {
 		req.Header.Set(k, v)
 	}
