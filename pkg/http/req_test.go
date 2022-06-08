@@ -17,7 +17,8 @@ func TestGetReq(t *testing.T) {
 		assert.Error(t, err, "请求失败")
 		return
 	}
-	fmt.Println("resp: ", string(rb))
+	fmt.Println("resp Body: ", string(rb.Body))
+	fmt.Println("resp StatusCode: ", rb.StatusCode)
 }
 
 
@@ -33,5 +34,6 @@ func TestPostReq(t *testing.T) {
 		assert.Error(t, err, "请求失败")
 		return
 	}
-	fmt.Println("resp: ", string(rb))
+	fmt.Println("resp Body: ", string(rb.Body))
+	fmt.Println("resp StatusCode: ", rb.StatusCode)
 }

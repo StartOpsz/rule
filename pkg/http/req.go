@@ -16,6 +16,13 @@ type Req struct {
 	Timeout int
 }
 
+type Resp struct {
+	Body          []byte
+	StatusCode    int
+	Header        nHttp.Header
+	ContentLength int64
+}
+
 type ReqMethod int
 
 const (
@@ -43,11 +50,12 @@ func (method ReqMethod) String() string {
 	}
 }
 
-func (r Req) Do() ([]byte, error) {
+func (r Req) Do() (Resp, error) {
+	rp := Resp{}
 	validate := validator.New()
 	err := validate.Struct(&r)
 	if err != nil {
-		return nil, err
+		return rp, err
 	}
 	
 	if r.Timeout == 0 {
@@ -59,7 +67,7 @@ func (r Req) Do() ([]byte, error) {
 	
 	req, err := nHttp.NewRequest(r.Method.String(), r.Url, bytes.NewBuffer(r.Body))
 	if err != nil {
-		return nil, err
+		return rp, err
 	}
 	
 	for k, v := range r.Headers {
@@ -68,12 +76,20 @@ func (r Req) Do() ([]byte, error) {
 	
 	resp, err := client.Do(req)
 	if err != nil {
-		return nil, err
+		return rp, err
 	}
 	
-	respByte, err := ioutil.ReadAll(resp.Body)
+	rp.Header = resp.Header
+	rp.StatusCode = resp.StatusCode
+	rp.ContentLength = resp.ContentLength
 	
+	respByte, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return rp, err
+	}
+	
+	rp.Body = respByte
 	defer resp.Body.Close()
 	
-	return respByte, nil
+	return rp, nil
 }
