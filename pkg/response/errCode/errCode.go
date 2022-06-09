@@ -10,6 +10,9 @@ const (
 	UserPermissionDenyCode = 14030
 	UserPermissionDenyMsg  = "用户权限拒绝"
 
+	UserUnAuthorizeCode = 14031
+	UserUnAuthorizeMsg = "用户未认证"
+	
 	ParameterNotFoundCode = 14041
 	ParameterNotFoundMsg  = "参数缺失"
 	
@@ -24,6 +27,7 @@ const (
 	// GRpc 调用 Endpoint 为空
 	GRpcEndpointNotFoundCode = 15052
 	GRpcEndpointNotFoundMsg = "Endpoint Is Null"
+	
 	// GRpc 调用返回 error
 	GRpcCallErrorCode = 15053
 	GRpcCallErrorMsg = "Endpoint return error"
