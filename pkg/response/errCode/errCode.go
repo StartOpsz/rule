@@ -3,7 +3,10 @@ package errCode
 const (
 	NormalCode = 0
 	NormalMsg  = "ok"
-
+	
+	RegisterUserExistsCode = 14031
+	RegisterUserExistsMsg = "该用户已经存在"
+	
 	NotFoundCode = 14040
 	NotFoundMsg  = "资源未发现"
 
