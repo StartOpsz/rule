@@ -29,9 +29,5 @@ func GetRegion() string {
 }
 
 func GetConfigPath() string {
-	configPath := os.Getenv("configPath")
-	if configPath == "" {
-		configPath = "conf/config.yaml"
-	}
-	return configPath
+	return os.Getenv("configPath")
 }
