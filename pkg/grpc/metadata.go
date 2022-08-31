@@ -10,7 +10,8 @@ import (
 )
 
 // grpc 返回 []string, 只获取第一个 String
-func GetStringFromGrpc(ctx context.Context,key string) (string, error) {
+
+func GetStringFromGrpc(ctx context.Context, key string) (string, error) {
 	if md, ok := gmetadata.FromIncomingContext(ctx); ok {
 		values := md.Get(key)
 		if len(values) == 0 {
@@ -24,6 +25,7 @@ func GetStringFromGrpc(ctx context.Context,key string) (string, error) {
 }
 
 // kratos 只返回 string
+
 func GetStringFromKratos(ctx context.Context, key string) (string, error) {
 	if md, ok := kmetadata.FromServerContext(ctx); ok {
 		value := md.Get(key)
