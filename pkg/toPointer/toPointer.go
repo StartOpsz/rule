@@ -11,3 +11,7 @@ func Int32Point(v int32) *int32 {
 func Int64Point(v int64) *int64 {
 	return &v
 }
+
+func BoolPoint(v bool) *bool {
+	return &v
+}
