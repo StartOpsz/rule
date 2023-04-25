@@ -15,5 +15,8 @@ func GetNacosNameSpaceId() string {
 
 func GetNacosEndpoints() []string {
 	nacosEndpoints := os.Getenv("nacosEndpoints")
+	if nacosEndpoints == "" {
+		return []string{}
+	}
 	return strings.Split(nacosEndpoints, ",")
 }
