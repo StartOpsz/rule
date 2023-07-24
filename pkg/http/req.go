@@ -2,6 +2,8 @@ package http
 
 import (
 	"bytes"
+	"crypto/tls"
+	"fmt"
 	"github.com/go-playground/validator/v10"
 	"io/ioutil"
 	nHttp "net/http"
@@ -94,4 +96,31 @@ func (r Req) Do() (Resp, error) {
 	defer resp.Body.Close()
 	
 	return rp, nil
+}
+
+// 查看 HTTP 站点证书
+
+func GetHttpCertificate(url string) {
+	tr := &nHttp.Transport{
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+	}
+	client := &nHttp.Client{Transport: tr}
+	resp, err := client.Get(url)
+	if err != nil {
+		return
+	}
+	defer func() { _ = resp.Body.Close() }()
+	
+	for _, cert := range resp.TLS.PeerCertificates {
+		fmt.Println("cert DNSNames: ", cert.DNSNames)
+		fmt.Println("cert NotAfter: ", cert.NotAfter)
+		fmt.Println("cert NotBefore: ", cert.NotBefore)
+		fmt.Println("cert Subject: ", cert.Subject)
+		fmt.Println("cert Issuer: ", cert.Issuer)
+		expDate := int(cert.NotAfter.Sub(time.Now()).Hours() / 24)
+		if expDate <= 30 {
+			return
+		}
+	}
+	return
 }

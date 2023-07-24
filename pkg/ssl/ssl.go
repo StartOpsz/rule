@@ -1,6 +1,7 @@
 package ssl
 
 import (
+	"crypto/tls"
 	"crypto/x509"
 	"encoding/pem"
 	"errors"
@@ -21,6 +22,10 @@ type CertificateInfo struct {
 func sslCertificateObj(sslCertificateContent []byte) (*x509.Certificate, error) {
 	
 	sslCertificatePemDecode, _ := pem.Decode(sslCertificateContent)
+	
+	if sslCertificatePemDecode == nil {
+		return nil, errors.New("解析证书失败")
+	}
 	
 	defer func() {
 		if r := recover(); r != nil {
@@ -59,6 +64,22 @@ func ParseSSLCertificate(sslCertificateContent []byte) (c *CertificateInfo, err 
 	certificateInfo.DNSNames = sslCertificateX509Obj.DNSNames
 	
 	return &certificateInfo, nil
+}
+
+/*
+network: tcp
+addr: 1.1.1.1:443
+*/
+
+func VerifyRemoteHostName(network, addr, hostname string) error {
+	conn, err := tls.Dial(network, addr, nil)
+	if err != nil {
+		return err
+	}
+	
+	err = conn.VerifyHostname(hostname)
+	
+	return err
 }
 
 /*
