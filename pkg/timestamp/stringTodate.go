@@ -34,12 +34,12 @@ func PrometheusStringToTime(timeString string) (time.Time, error) {
 	return time.ParseInLocation("2006-01-02T15:04:05", timeString, loc)
 }
 
-func StringToTime(timeString string) (time.Time, error) {
-	//loc , err := time.LoadLocation("Asia/Shanghai")
-	
-	loc, err := time.LoadLocation("CST")
+func StringToTime(timeString string, location string) (time.Time, error) {
+	loc, err := time.LoadLocation(location)
+	//loc, err := time.LoadLocation("CST")
 	if err != nil {
-		return time.Parse("2006-01-02 15:04:05", timeString)
+		return time.Now(), err
+		//return time.Parse("2006-01-02 15:04:05", timeString)
 	}
 	
 	return time.ParseInLocation("2006-01-02 15:04:05", timeString, loc)
