@@ -34,6 +34,17 @@ func PrometheusStringToTime(timeString string) (time.Time, error) {
 	return time.ParseInLocation("2006-01-02T15:04:05", timeString, loc)
 }
 
+// utc string 格式: 2011-06-01T15:00:00Z
+
+func UTCStringToTime(timeString string) (time.Time, error) {
+	loc, err := time.LoadLocation("UTC")
+	if err != nil {
+		return time.Now(), err
+	}
+	
+	return time.ParseInLocation("2006-01-02T15:04:05Z", timeString, loc)
+}
+
 func StringToTime(timeString string, location string) (time.Time, error) {
 	loc, err := time.LoadLocation(location)
 	//loc, err := time.LoadLocation("CST")

@@ -36,3 +36,12 @@ func TestStringToTime(t *testing.T) {
 	fmt.Println(date.Unix())
 	fmt.Println(date.String())
 }
+
+func TestUTCStringToTime(t *testing.T) {
+	s := "2011-06-01T15:00:00Z"
+	date, err := UTCStringToTime(s)
+	require.NoError(t, err, "utc string时间转换time失败")
+	fmt.Println(date.String())
+	fmt.Println(date.Unix())
+	
+}
